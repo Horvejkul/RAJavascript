@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="https://unpkg.com/jspsych@7.0.0"></script>
+    <script src="jspsych-image-button-response-audio.js"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.0.0"></script>
+    <link href="https://unpkg.com/jspsych@7.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+
+    /* initialize jsPsych */
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        jsPsych.data.displayData();
+      }
+    });
+
+    /* create timeline */
+    var timeline = [];
+
+    /* preload images */
+    var preload = {
+      type: jsPsychPreload,
+      images: ['img/blue.png', 'img/smallblue.png']
+    };
+    timeline.push(preload);
+
+    var trial = {
+      type: 'image-button-response-audio',
+      stimulus: 'img/blue.png',
+      choices:["Yes","No"],
+      prompt: 'Do you expect a noise due to this stimulus?',
+      button_duration: 4000,
+      trial_duration: 8000,
+      }
+    timeline.push(test);
+
+    jsPsych.run(timeline);
+
+  </script>
+</html>
